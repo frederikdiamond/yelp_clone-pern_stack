@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import RestaurantFinder from '../apis/RestaurantFinder'
 import { RestaurantsContext } from '../context/RestaurantsContext'
 
-export const RestaurantList = (props) => {
+const RestaurantList = (props) => {
     const { restaurants, setRestaurants } = useContext(RestaurantsContext)
     useEffect(() => {
         const fetchData = async () => {
@@ -31,32 +31,26 @@ export const RestaurantList = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>McDonalds</td>
-                        <td>New York</td>
-                        <td>$$</td>
-                        <td>Rating</td>
-                        <td>
-                            <button className="btn btn-warning">Update</button>
-                        </td>
-                        <td>
-                            <button className="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>McDonalds</td>
-                        <td>New York</td>
-                        <td>$$</td>
-                        <td>Rating</td>
-                        <td>
-                            <button className="btn btn-warning">Update</button>
-                        </td>
-                        <td>
-                            <button className="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
+                    {restaurants && restaurants.map((restaurant) => {
+                        return (
+                            <tr key={restaurant.id}>
+                                <td>{restaurant.name}</td>
+                                <td>{restaurant.location}</td>
+                                <td>{"$".repeat(restaurant.price_range)}</td>
+                                <td>reviews</td>
+                                <td>
+                                    <button className="btn btn-warning">Update</button>
+                                </td>
+                                <td>
+                                    <button className="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
             </table>
         </div>
     )
 }
+
+export default RestaurantList
