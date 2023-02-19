@@ -71,7 +71,7 @@ app.put("/api/v1/restaurants/:id", async (req, res) => {
         const results = await db.query("update restaurants set name = $1, location = $2, price_range = $3 where id = $4 returning *", [req.body.name, req.body.location, req.body.price_range, req.params.id])
 
         res.status(200).json({
-            status: "succes",
+            status: "success",
             data: {
                 restaurant: results.rows[0]
             }

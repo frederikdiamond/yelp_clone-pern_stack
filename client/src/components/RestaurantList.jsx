@@ -17,14 +17,16 @@ const RestaurantList = (props) => {
         fetchData()
     }, [])
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (e, id) => {
+        e.stopPropagation();
         try {
             const response = await RestaurantFinder.delete(`/${id}`)
-            setRestaurants(restaurants.filter((restaurant) => {
+
+            setRestaurants(restaurants.filter(restaurant => {
                 return restaurant.id !== id
             }))
         } catch (err) {
-
+            console.log(err)
         }
     }
 
